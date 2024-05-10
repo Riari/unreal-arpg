@@ -1,0 +1,74 @@
+[
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPG.Build.cs",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPG.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPG.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPGCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPGCharacter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPGGameMode.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPGGameMode.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPGPlayerController.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\ARPGPlayerController.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	}
+]

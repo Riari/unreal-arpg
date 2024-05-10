@@ -1,0 +1,623 @@
+{
+	"folders": [
+		{
+			"name": "ARPG",
+			"path": "."
+		},
+		{
+			"name": "UE5",
+			"path": "C:\\Program Files\\Epic Games\\UE_5.4"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off",
+		"npm.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "ARPG Win64 Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Debug",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Debug",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPG Win64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Debug",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"DebugGame",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"DebugGame",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPG Win64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"DebugGame",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Development",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Development",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPG Win64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Development",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Test Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Test",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Test Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Test",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPG Win64 Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Test Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Test",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Shipping Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Shipping",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Shipping Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Shipping",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPG Win64 Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPG Win64 Shipping Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPG",
+					"Win64",
+					"Shipping",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 Debug Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"Debug",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"Debug",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPGEditor Win64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 Debug Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"Debug",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 DebugGame Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"DebugGame",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"DebugGame",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPGEditor Win64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"DebugGame",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 Development Build",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"Development",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 Development Rebuild",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"Development",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"ARPGEditor Win64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"label": "ARPGEditor Win64 Development Clean",
+				"group": "build",
+				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"args": [
+					"ARPGEditor",
+					"Win64",
+					"Development",
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Attach",
+				"request": "attach",
+				"processId": "${command:pickProcess}",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPG (Debug)",
+				"request": "launch",
+				"program": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Binaries\\Win64\\UnrealGame-Win64-Debug.exe",
+				"preLaunchTask": "ARPG Win64 Debug Build",
+				"args": [
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPG (DebugGame)",
+				"request": "launch",
+				"program": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Binaries\\Win64\\UnrealGame-Win64-DebugGame.exe",
+				"preLaunchTask": "ARPG Win64 DebugGame Build",
+				"args": [
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPG (Development)",
+				"request": "launch",
+				"program": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Binaries\\Win64\\UnrealGame.exe",
+				"preLaunchTask": "ARPG Win64 Development Build",
+				"args": [
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPG (Test)",
+				"request": "launch",
+				"program": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Binaries\\Win64\\UnrealGame-Win64-Test.exe",
+				"preLaunchTask": "ARPG Win64 Test Build",
+				"args": [
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPG (Shipping)",
+				"request": "launch",
+				"program": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Binaries\\Win64\\UnrealGame-Win64-Shipping.exe",
+				"preLaunchTask": "ARPG Win64 Shipping Build",
+				"args": [
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPGEditor (Debug)",
+				"request": "launch",
+				"program": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-Debug.exe",
+				"preLaunchTask": "ARPGEditor Win64 Debug Build",
+				"args": [
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject"
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPGEditor (DebugGame)",
+				"request": "launch",
+				"program": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-DebugGame.exe",
+				"preLaunchTask": "ARPGEditor Win64 DebugGame Build",
+				"args": [
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject"
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Launch ARPGEditor (Development)",
+				"request": "launch",
+				"program": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Binaries\\Win64\\UnrealEditor.exe",
+				"preLaunchTask": "ARPGEditor Win64 Development Build",
+				"args": [
+					"C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject"
+				],
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4",
+				"stopAtEntry": false,
+				"console": "integratedTerminal",
+				"type": "cppvsdbg",
+				"visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+				"sourceFileMap": {
+					"D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+				}
+			},
+			{
+				"name": "Generate Project Files",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "UnrealBuildTool Win64 Development Build",
+				"program": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Build\\BatchFiles\\RunUBT.bat",
+				"args": [
+					"-projectfiles",
+					"-vscode",
+					"-project=C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\ARPG.uproject",
+					"-game",
+					"-engine",
+					"-dotnet"
+				],
+				"console": "integratedTerminal",
+				"stopAtEntry": false,
+				"cwd": "C:\\Program Files\\Epic Games\\UE_5.4"
+			}
+		]
+	}
+}
