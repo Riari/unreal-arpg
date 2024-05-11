@@ -4,11 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "../Interfaces/Hoverable.h"
 #include "BaseMobType.generated.h"
 
 UCLASS()
-class ARPG_API ABaseMobType : public ACharacter, public IHoverable
+class ARPG_API ABaseMobType : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -19,7 +18,11 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	virtual void OnHover();
+	UFUNCTION()
+	void OnMouseOverBegin(UPrimitiveComponent* TouchedComponent);
+
+	UFUNCTION()
+	void OnMouseOverEnd(UPrimitiveComponent* TouchedComponent);
 
 protected:
 	UPROPERTY(Category = "Appearance", EditAnywhere)
@@ -33,8 +36,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	float HoverTime{0.1f};
-	float HoverTimer{0.0f};
+	class APlayerController* CurrentPlayerController;
 
 	void SetTextureSampleMultiplier(float Multiplier);
 

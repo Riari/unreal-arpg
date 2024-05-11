@@ -72,8 +72,8 @@ private:
 
 	bool bIsInForceAttackMode{false};
 
-	class AActor* HoveredActor;
-	class IHoverable* HoveredActorHoverable;
+	// class AActor* HoveredActor;
+	// class IHoverable* HoveredActorHoverable;
 };
 
 

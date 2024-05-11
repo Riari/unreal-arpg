@@ -6,10 +6,10 @@
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
 #include "ARPGCharacter.h"
-#include "Interfaces/Hoverable.h"
 #include "Engine/World.h"
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
+#include "GenericPlatform/ICursor.h"
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
 
@@ -47,28 +47,31 @@ void AARPGPlayerController::PlayerTick(float DeltaTime)
 	{
 		CachedDestination = Hit.Location;
 
-		AActor* HitActor = Hit.GetActor();
-		if (HitActor)
-		{
-			if (HitActor != HoveredActor)
-			{
-				if (HitActor->GetClass()->ImplementsInterface(UHoverable::StaticClass()))
-				{
-					HoveredActor = HitActor;
-					HoveredActorHoverable = Cast<IHoverable>(HoveredActor);
-				}
-				else
-				{
-					HoveredActor = nullptr;
-					HoveredActorHoverable = nullptr;
-				}
-			}
+		// AActor* HitActor = Hit.GetActor();
+		// if (HitActor)
+		// {
+		// 	if (HitActor != HoveredActor)
+		// 	{
+		// 		if (HitActor->GetClass()->ImplementsInterface(UHoverable::StaticClass()))
+		// 		{
+		// 			HoveredActor = HitActor;
+		// 			HoveredActorHoverable = Cast<IHoverable>(HoveredActor);
+		// 		}
+		// 		else
+		// 		{
+		// 			HoveredActor = nullptr;
+		// 			HoveredActorHoverable = nullptr;
+		// 		}
+		// 	}
 
-			if (HoveredActorHoverable)
-			{
-				HoveredActorHoverable->OnHover();
-			}
-		}
+		// 	if (HoveredActorHoverable)
+		// 	{
+		// 		HoveredActorHoverable->OnHover();
+		// 	}
+		// }
+		// else
+		// {
+		// }
 	}
 }
 
