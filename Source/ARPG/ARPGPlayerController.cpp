@@ -1,17 +1,21 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "ARPGPlayerController.h"
-#include "GameFramework/Pawn.h"
+
 #include "Blueprint/AIBlueprintHelperLibrary.h"
-#include "NiagaraSystem.h"
-#include "NiagaraFunctionLibrary.h"
-#include "ARPGCharacter.h"
+#include "Engine/LocalPlayer.h"
 #include "Engine/World.h"
 #include "EnhancedInputComponent.h"
-#include "InputActionValue.h"
-#include "GenericPlatform/ICursor.h"
 #include "EnhancedInputSubsystems.h"
-#include "Engine/LocalPlayer.h"
+#include "GameFramework/Pawn.h"
+#include "GenericPlatform/ICursor.h"
+#include "InputActionValue.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
+
+#include "ARPGCharacter.h"
+#include "MobType/BaseMobType.h"
+#include "WeaponActor.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -26,6 +30,8 @@ AARPGPlayerController::AARPGPlayerController()
 void AARPGPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	ControlledPawn = Cast<AARPGCharacter>(GetPawn());
 }
 
 void AARPGPlayerController::PlayerTick(float DeltaTime)
@@ -46,32 +52,19 @@ void AARPGPlayerController::PlayerTick(float DeltaTime)
 	if (bHitSuccessful)
 	{
 		CachedDestination = Hit.Location;
-
-		// AActor* HitActor = Hit.GetActor();
-		// if (HitActor)
-		// {
-		// 	if (HitActor != HoveredActor)
-		// 	{
-		// 		if (HitActor->GetClass()->ImplementsInterface(UHoverable::StaticClass()))
-		// 		{
-		// 			HoveredActor = HitActor;
-		// 			HoveredActorHoverable = Cast<IHoverable>(HoveredActor);
-		// 		}
-		// 		else
-		// 		{
-		// 			HoveredActor = nullptr;
-		// 			HoveredActorHoverable = nullptr;
-		// 		}
-		// 	}
-
-		// 	if (HoveredActorHoverable)
-		// 	{
-		// 		HoveredActorHoverable->OnHover();
-		// 	}
-		// }
-		// else
-		// {
-		// }
+		AActor* HitActor = Hit.GetActor();
+		if (PrevTargetActor != HitActor)
+		{
+			PrevTargetActor = CurrentTargetActor;
+			CurrentTargetActor = HitActor;
+			CurrentTargetMobActor = Cast<ABaseMobType>(HitActor);
+		}
+	}
+	else
+	{
+		PrevTargetActor = CurrentTargetActor;
+		CurrentTargetActor = nullptr;
+		CurrentTargetMobActor = nullptr;
 	}
 }
 
@@ -90,16 +83,16 @@ void AARPGPlayerController::SetupInputComponent()
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
 		// Setup mouse input events
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Started, this, &AARPGPlayerController::OnInputStarted);
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Triggered, this, &AARPGPlayerController::OnSetDestinationTriggered);
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Completed, this, &AARPGPlayerController::OnSetDestinationReleased);
-		EnhancedInputComponent->BindAction(SetDestinationClickAction, ETriggerEvent::Canceled, this, &AARPGPlayerController::OnSetDestinationReleased);
+		EnhancedInputComponent->BindAction(PrimaryClickAction, ETriggerEvent::Started, this, &AARPGPlayerController::OnInputStarted);
+		EnhancedInputComponent->BindAction(PrimaryClickAction, ETriggerEvent::Triggered, this, &AARPGPlayerController::OnPrimaryActionTriggered);
+		EnhancedInputComponent->BindAction(PrimaryClickAction, ETriggerEvent::Completed, this, &AARPGPlayerController::OnPrimaryActionReleased);
+		EnhancedInputComponent->BindAction(PrimaryClickAction, ETriggerEvent::Canceled, this, &AARPGPlayerController::OnPrimaryActionReleased);
 
 		// Setup touch input events
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Started, this, &AARPGPlayerController::OnInputStarted);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Triggered, this, &AARPGPlayerController::OnTouchTriggered);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Completed, this, &AARPGPlayerController::OnTouchReleased);
-		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AARPGPlayerController::OnTouchReleased);
+		EnhancedInputComponent->BindAction(PrimaryTouchAction, ETriggerEvent::Started, this, &AARPGPlayerController::OnInputStarted);
+		EnhancedInputComponent->BindAction(PrimaryTouchAction, ETriggerEvent::Triggered, this, &AARPGPlayerController::OnTouchTriggered);
+		EnhancedInputComponent->BindAction(PrimaryTouchAction, ETriggerEvent::Completed, this, &AARPGPlayerController::OnTouchReleased);
+		EnhancedInputComponent->BindAction(PrimaryTouchAction, ETriggerEvent::Canceled, this, &AARPGPlayerController::OnTouchReleased);
 
 		EnhancedInputComponent->BindAction(ForceAttackAction, ETriggerEvent::Started, this, &AARPGPlayerController::OnForceAttackStarted);
 		EnhancedInputComponent->BindAction(ForceAttackAction, ETriggerEvent::Completed, this, &AARPGPlayerController::OnForceAttackEnded);
@@ -117,29 +110,32 @@ void AARPGPlayerController::OnInputStarted()
 }
 
 // Triggered every frame when the input is held down
-void AARPGPlayerController::OnSetDestinationTriggered()
+void AARPGPlayerController::OnPrimaryActionTriggered()
 {
 	FollowTime += GetWorld()->GetDeltaSeconds();
 
-	AARPGCharacter* ControlledPawn = Cast<AARPGCharacter>(GetPawn());
-	if (ControlledPawn != nullptr)
+	if (ControlledPawn == nullptr) return;
+
+	FVector WorldDirection = (CachedDestination - ControlledPawn->GetActorLocation()).GetSafeNormal();
+	FRotator Rotation = FRotator(0.f, WorldDirection.Rotation().Yaw, 0.f);
+	ControlledPawn->SetActorRotation(Rotation);
+
+	if (ControlledPawn->TryAttack(CurrentTargetMobActor))
 	{
-		FVector WorldDirection = (CachedDestination - ControlledPawn->GetActorLocation()).GetSafeNormal();
-
-		if (bIsInForceAttackMode)
-		{
-			FRotator Rotation = FRotator(0.f, WorldDirection.Rotation().Yaw, 0.f);
-			// Rotate the pawn
-			ControlledPawn->SetActorRotation(Rotation);
-			ControlledPawn->Attack();
-			return;
-		}
-
-		ControlledPawn->AddMovementInput(WorldDirection, 1.0, false);
+		StopMovement();
+		return;
 	}
+
+	if (bIsInForceAttackMode)
+	{
+		// TODO: Force attack
+		return;
+	}
+
+	ControlledPawn->AddMovementInput(WorldDirection, 1.0, false);
 }
 
-void AARPGPlayerController::OnSetDestinationReleased()
+void AARPGPlayerController::OnPrimaryActionReleased()
 {
 	if (bIsInForceAttackMode) return;
 
@@ -158,20 +154,19 @@ void AARPGPlayerController::OnSetDestinationReleased()
 void AARPGPlayerController::OnTouchTriggered()
 {
 	bIsTouch = true;
-	OnSetDestinationTriggered();
+	OnPrimaryActionTriggered();
 }
 
 void AARPGPlayerController::OnTouchReleased()
 {
 	bIsTouch = false;
-	OnSetDestinationReleased();
+	OnPrimaryActionReleased();
 }
 
 void AARPGPlayerController::OnForceAttackStarted()
 {
 	bIsInForceAttackMode = true;
 
-	AARPGCharacter* ControlledPawn = Cast<AARPGCharacter>(GetPawn());
 	if (ControlledPawn != nullptr)
 	{
 		ControlledPawn->SetForceAttackMode(true);
@@ -182,7 +177,6 @@ void AARPGPlayerController::OnForceAttackEnded()
 {
 	bIsInForceAttackMode = false;
 
-	AARPGCharacter* ControlledPawn = Cast<AARPGCharacter>(GetPawn());
 	if (ControlledPawn != nullptr)
 	{
 		ControlledPawn->SetForceAttackMode(false);

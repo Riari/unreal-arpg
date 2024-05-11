@@ -12,6 +12,7 @@
 #include "Materials/Material.h"
 #include "Engine/World.h"
 
+#include "MobType/BaseMobType.h"
 #include "WeaponActor.h"
 
 AARPGCharacter::AARPGCharacter()
@@ -64,19 +65,34 @@ void AARPGCharacter::Tick(float DeltaTime)
 	}
 }
 
+AWeaponActor* AARPGCharacter::GetCurrentWeapon()
+{
+	return CurrentWeapon;
+}
+
 void AARPGCharacter::SetForceAttackMode(bool bForceAttackModeEnabled)
 {
 	bIsInForceAttackMode = bForceAttackModeEnabled;
 }
 
-void AARPGCharacter::Attack()
+// TODO: Refactor weapon attacks to use line or shape collisions instead of a direct target
+bool AARPGCharacter::TryAttack(ABaseMobType* MobTarget)
 {
+	if (MobTarget == nullptr) return false;
+
+	float WeaponAttackRange = CurrentWeapon->GetAttackRange();
+	float DistanceToTarget = (MobTarget->GetActorLocation() - GetActorLocation()).Size();
+	if (DistanceToTarget > WeaponAttackRange) return false;
+
 	bIsAttacking = true;
 
 	if (AttackTimer == 0.f && CurrentWeapon)
 	{
 		CurrentWeapon->Swing();
+		// TODO: Damage the target
 	}
+
+	return true;
 }
 
 void AARPGCharacter::BeginPlay()

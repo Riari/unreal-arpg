@@ -20,6 +20,16 @@ void AWeaponActor::Swing()
 	}
 }
 
+float AWeaponActor::GetAttackRange() const
+{
+    return AttackRange;
+}
+
+FFloatRange AWeaponActor::GetBaseDamage() const
+{
+	return BaseDamage;
+}
+
 void AWeaponActor::BeginPlay()
 {
 	Super::BeginPlay();

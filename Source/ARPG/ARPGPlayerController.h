@@ -35,10 +35,10 @@ public:
 	UInputMappingContext* DefaultMappingContext;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* SetDestinationClickAction;
+	UInputAction* PrimaryClickAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
-	UInputAction* SetDestinationTouchAction;
+	UInputAction* PrimaryTouchAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* ForceAttackAction;
@@ -46,18 +46,14 @@ public:
 	virtual void PlayerTick(float DeltaTime) override;
 
 protected:
-	/** True if the controlled character should navigate to the mouse cursor. */
-	uint32 bMoveToMouseCursor : 1;
-
 	virtual void SetupInputComponent() override;
-	
-	// To add mapping context
+
 	virtual void BeginPlay();
 
 	/** Input handlers for SetDestination action. */
 	void OnInputStarted();
-	void OnSetDestinationTriggered();
-	void OnSetDestinationReleased();
+	void OnPrimaryActionTriggered();
+	void OnPrimaryActionReleased();
 	void OnTouchTriggered();
 	void OnTouchReleased();
 
@@ -70,10 +66,12 @@ private:
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
 
-	bool bIsInForceAttackMode{false};
+	class AARPGCharacter* ControlledPawn;
+	class AActor* PrevTargetActor;
+	class AActor* CurrentTargetActor;
+	class ABaseMobType* CurrentTargetMobActor;
 
-	// class AActor* HoveredActor;
-	// class IHoverable* HoveredActorHoverable;
+	bool bIsInForceAttackMode{false};
 };
 
 

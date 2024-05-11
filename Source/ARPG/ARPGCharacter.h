@@ -19,8 +19,10 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	class AWeaponActor* GetCurrentWeapon();
+
 	void SetForceAttackMode(bool bForceAttackModeEnabled);
-	void Attack();
+	bool TryAttack(class ABaseMobType* MobActor);
 
 protected:
 	UPROPERTY(Category = "Combat", EditDefaultsOnly)
