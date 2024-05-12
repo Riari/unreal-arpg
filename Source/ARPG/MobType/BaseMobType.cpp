@@ -3,13 +3,22 @@
 
 #include "BaseMobType.h"
 
+#include "Components/AudioComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/PlayerController.h"
+#include "Engine/DecalActor.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
+#include "Sound/SoundCue.h"
 
 ABaseMobType::ABaseMobType()
+	: WeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("WeaponHitSoundComponent"))}
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	WeaponHitSoundComponent->SetupAttachment(RootComponent);
 }
 
 void ABaseMobType::BeginPlay()
@@ -29,6 +38,8 @@ void ABaseMobType::BeginPlay()
 	ActorMesh->OnEndCursorOver.AddDynamic(this, &ABaseMobType::OnMouseOverEnd);
 	
 	CurrentPlayerController = GetWorld()->GetFirstPlayerController();
+
+	if (WeaponHitSoundCue != nullptr) WeaponHitSoundComponent->SetSound(WeaponHitSoundCue);
 }
 
 void ABaseMobType::Tick(float DeltaTime)
@@ -51,6 +62,24 @@ void ABaseMobType::OnMouseOverEnd(UPrimitiveComponent *TouchedComponent)
 {
 	CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
 	SetTextureSampleMultiplier(1.f);
+}
+
+void ABaseMobType::PlayWeaponHitSound()
+{
+	WeaponHitSoundComponent->Play();
+
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), BloodSplashParticleSystem, GetActorLocation());
+
+	for (size_t i = 0; i < 2; ++i)
+	{
+		FVector SpawnLocation = GetActorLocation() + UKismetMathLibrary::RandomUnitVector() * 100.f;
+		SpawnLocation.Z = 0.f;
+
+		FRotator SpawnRotation{};
+		SpawnRotation.Yaw = UKismetMathLibrary::RandomFloatInRange(0.f, 360.f);
+
+		GetWorld()->SpawnActor<ADecalActor>(BloodSplatterDecalActorClass, SpawnLocation, SpawnRotation);
+	}
 }
 
 void ABaseMobType::SetTextureSampleMultiplier(float Multiplier)

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
 #include "BaseMobType.generated.h"
 
 UCLASS()
@@ -24,12 +25,25 @@ public:
 	UFUNCTION()
 	void OnMouseOverEnd(UPrimitiveComponent* TouchedComponent);
 
+	void PlayWeaponHitSound();
+
 protected:
 	UPROPERTY(Category = "Appearance", EditAnywhere)
 	float TextureSampleMultiplierHover{2.0f};
 
 	UPROPERTY(Category = "Appearance", EditAnywhere)
 	TArray<class UMaterialInterface*> Materials;
+
+	UPROPERTY(Category = "Effects", EditAnywhere)
+	class USoundCue* WeaponHitSoundCue;
+
+	UPROPERTY(Category = "Effects", EditAnywhere)
+	class UNiagaraSystem* BloodSplashParticleSystem;
+
+	UPROPERTY(Category = "Effects", EditAnywhere)
+	TSubclassOf<class ADecalActor> BloodSplatterDecalActorClass;
+
+	class UAudioComponent* WeaponHitSoundComponent;
 
 	TArray<class UMaterialInstanceDynamic*> MaterialInstances;
 

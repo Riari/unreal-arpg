@@ -3,21 +3,18 @@
 
 #include "WeaponActor.h"
 
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 
 AWeaponActor::AWeaponActor()
 	: Mesh{CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"))}
+	, SwingSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("SwingSoundComponent"))}
 {
 	PrimaryActorTick.bCanEverTick = true;
 	RootComponent = Mesh;
-}
 
-void AWeaponActor::Swing()
-{
-	if (SwingSounds.Num() > 0)
-	{
-		UGameplayStatics::PlaySoundAtLocation(this, SwingSounds[FMath::RandRange(0, SwingSounds.Num() - 1)], GetActorLocation());
-	}
+	SwingSoundComponent->SetupAttachment(RootComponent);
 }
 
 float AWeaponActor::GetAttackRange() const
@@ -30,8 +27,15 @@ FFloatRange AWeaponActor::GetBaseDamage() const
 	return BaseDamage;
 }
 
+void AWeaponActor::PlaySwingSound()
+{
+	SwingSoundComponent->Play();
+}
+
 void AWeaponActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (SwingSoundCue != nullptr) SwingSoundComponent->SetSound(SwingSoundCue);
 }
 

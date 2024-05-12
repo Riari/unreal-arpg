@@ -35,6 +35,9 @@ public:
 	 */
 	bool AttackTarget(ABaseMobType* TargetMobActor);
 
+	void PlayWeaponSwingSound();
+	void InflictWeaponDamageOnTarget();
+
 protected:
 	UPROPERTY(Category = "Combat", EditDefaultsOnly)
 	TSubclassOf<class AWeaponActor> MainHandWeaponClass;
@@ -56,8 +59,8 @@ private:
 	class USpringArmComponent* CameraBoom;
 
 	class AWeaponActor* CurrentWeapon;
+	class ABaseMobType* CurrentTarget;
 
 	float AttackDuration{0.7f};
 	float AttackTimer{0.0f};
 };
-

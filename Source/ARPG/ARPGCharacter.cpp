@@ -61,6 +61,7 @@ void AARPGCharacter::Tick(float DeltaTime)
 		{
 			AttackTimer = 0.0f;
 			bIsAttacking = false;
+			CurrentTarget = nullptr;
 		}
 	}
 }
@@ -104,17 +105,24 @@ bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobAc
 bool AARPGCharacter::AttackTarget(ABaseMobType* TargetMobActor)
 {
 	bIsAttacking = true;
-
-	if (AttackTimer == 0.f && CurrentWeapon)
-	{
-		CurrentWeapon->Swing();
-		if (TargetMobActor != nullptr)
-		{
-			// TODO: Damage the target
-		}
-	}
-
+	CurrentTarget = TargetMobActor;
 	return true;
+}
+
+void AARPGCharacter::PlayWeaponSwingSound()
+{
+	if (CurrentWeapon == nullptr) return;
+
+	CurrentWeapon->PlaySwingSound();
+}
+
+void AARPGCharacter::InflictWeaponDamageOnTarget()
+{
+	if (CurrentTarget == nullptr) return;
+
+	CurrentTarget->PlayWeaponHitSound();
+
+	// TODO: Apply damage
 }
 
 void AARPGCharacter::BeginPlay()

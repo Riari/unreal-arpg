@@ -15,10 +15,10 @@ class ARPG_API AWeaponActor : public AActor
 public:
 	AWeaponActor();
 
-	void Swing();
-
 	float GetAttackRange() const;
 	FFloatRange GetBaseDamage() const;
+
+	void PlaySwingSound();
 
 protected:
 	virtual void BeginPlay() override;
@@ -33,6 +33,8 @@ protected:
 	class USkeletalMeshComponent* Mesh;
 
 	UPROPERTY(Category = "Effects", EditAnywhere)
-	TArray<class USoundBase*> SwingSounds;
+	class USoundCue* SwingSoundCue;
+
+	class UAudioComponent* SwingSoundComponent;
 
 };
