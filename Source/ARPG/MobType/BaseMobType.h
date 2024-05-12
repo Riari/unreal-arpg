@@ -27,7 +27,12 @@ public:
 
 	void PlayWeaponHitSound();
 
+	void ApplyDamage(float DamageAmount);
+
 protected:
+	UPROPERTY(Category = "Components", VisibleAnywhere, BlueprintReadWrite)
+	class UHealthComponent* HealthComponent;
+
 	UPROPERTY(Category = "Appearance", EditAnywhere)
 	float TextureSampleMultiplierHover{2.0f};
 
@@ -51,6 +56,8 @@ protected:
 
 private:
 	class APlayerController* CurrentPlayerController;
+
+	bool bIsAlive{true};
 
 	void SetTextureSampleMultiplier(float Multiplier);
 

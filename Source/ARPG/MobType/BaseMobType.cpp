@@ -13,8 +13,11 @@
 #include "NiagaraSystem.h"
 #include "Sound/SoundCue.h"
 
+#include "../HealthComponent.h"
+
 ABaseMobType::ABaseMobType()
 	: WeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("WeaponHitSoundComponent"))}
+	, HealthComponent{CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"))}
 {
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -54,18 +57,24 @@ void ABaseMobType::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void ABaseMobType::OnMouseOverBegin(UPrimitiveComponent* TouchedComponent)
 {
+	if (!bIsAlive) return;
+
 	CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Crosshairs;
 	SetTextureSampleMultiplier(TextureSampleMultiplierHover);
 }
 
 void ABaseMobType::OnMouseOverEnd(UPrimitiveComponent *TouchedComponent)
 {
+	if (!bIsAlive) return;
+
 	CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
 	SetTextureSampleMultiplier(1.f);
 }
 
 void ABaseMobType::PlayWeaponHitSound()
 {
+	if (!bIsAlive) return;
+
 	WeaponHitSoundComponent->Play();
 
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), BloodSplashParticleSystem, GetActorLocation());
@@ -79,6 +88,18 @@ void ABaseMobType::PlayWeaponHitSound()
 		SpawnRotation.Yaw = UKismetMathLibrary::RandomFloatInRange(0.f, 360.f);
 
 		GetWorld()->SpawnActor<ADecalActor>(BloodSplatterDecalActorClass, SpawnLocation, SpawnRotation);
+	}
+}
+
+void ABaseMobType::ApplyDamage(float DamageAmount)
+{
+	if (!bIsAlive) return;
+
+	if (HealthComponent->ApplyDamage(DamageAmount))
+	{
+		bIsAlive = false;
+		SetTextureSampleMultiplier(1.f);
+		CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
 	}
 }
 

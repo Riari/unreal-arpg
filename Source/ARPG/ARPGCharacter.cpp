@@ -90,7 +90,7 @@ bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobAc
 		return false;
 	}
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.f);
+	// DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.f);
 
 	for (FHitResult HitResult : HitResults)
 	{
@@ -121,8 +121,7 @@ void AARPGCharacter::InflictWeaponDamageOnTarget()
 	if (CurrentTarget == nullptr) return;
 
 	CurrentTarget->PlayWeaponHitSound();
-
-	// TODO: Apply damage
+	CurrentTarget->ApplyDamage(CurrentWeapon->RollDamage());
 }
 
 void AARPGCharacter::BeginPlay()

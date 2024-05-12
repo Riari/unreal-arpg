@@ -5,6 +5,7 @@
 
 #include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Math/UnrealMathUtility.h"
 #include "Sound/SoundCue.h"
 
 AWeaponActor::AWeaponActor()
@@ -30,6 +31,11 @@ FFloatRange AWeaponActor::GetBaseDamage() const
 void AWeaponActor::PlaySwingSound()
 {
 	SwingSoundComponent->Play();
+}
+
+float AWeaponActor::RollDamage()
+{
+	return FMath::RandRange(BaseDamage.GetLowerBoundValue(), BaseDamage.GetUpperBoundValue());
 }
 
 void AWeaponActor::BeginPlay()

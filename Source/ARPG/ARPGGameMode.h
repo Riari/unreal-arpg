@@ -13,6 +13,8 @@ class AARPGGameMode : public AGameModeBase
 
 public:
 	AARPGGameMode();
+
+	void ActorDied(AActor* DeadActor);
 };
 
 

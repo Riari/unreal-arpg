@@ -19,6 +19,7 @@ public:
 	FFloatRange GetBaseDamage() const;
 
 	void PlaySwingSound();
+	float RollDamage();
 
 protected:
 	virtual void BeginPlay() override;
@@ -27,7 +28,7 @@ protected:
 	float AttackRange{150.f};
 
 	UPROPERTY(Category = "Weapon Properties", EditAnywhere)
-	FFloatRange BaseDamage{5.f, 10.f};
+	FFloatRange BaseDamage{10.f, 25.f};
 
 	UPROPERTY(Category = "Components", VisibleAnywhere, BlueprintReadWrite)
 	class USkeletalMeshComponent* Mesh;

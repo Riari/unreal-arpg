@@ -24,3 +24,8 @@ AARPGGameMode::AARPGGameMode()
 		PlayerControllerClass = PlayerControllerBPClass.Class;
 	}
 }
+
+void AARPGGameMode::ActorDied(AActor* DeadActor)
+{
+
+}
