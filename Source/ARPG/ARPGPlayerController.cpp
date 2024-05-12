@@ -120,18 +120,28 @@ void AARPGPlayerController::OnPrimaryActionTriggered()
 	FRotator Rotation = FRotator(0.f, WorldDirection.Rotation().Yaw, 0.f);
 	ControlledPawn->SetActorRotation(Rotation);
 
-	if (ControlledPawn->TryAttack(CurrentTargetMobActor))
-	{
-		StopMovement();
-		return;
-	}
+	// TODO: Limit calls to this to once per attack when attacking (one line sweep == one attack == one target)
+	TArray<ABaseMobType*> TargetMobActors;
+	ControlledPawn->TryGetTargetMobActors(TargetMobActors);
 
 	if (bIsInForceAttackMode)
 	{
-		// TODO: Force attack
+		StopMovement();
+		ControlledPawn->AttackTarget(TargetMobActors.Num() > 0 ? TargetMobActors[0] : nullptr);
 		return;
 	}
 
+	for (ABaseMobType* TargetMobActor : TargetMobActors)
+	{
+		if (TargetMobActor == CurrentTargetMobActor)
+		{
+			StopMovement();
+			ControlledPawn->AttackTarget(TargetMobActor);
+			return;
+		}
+	}
+
+	// No valid target and not in force attack mode, so just move
 	ControlledPawn->AddMovementInput(WorldDirection, 1.0, false);
 }
 

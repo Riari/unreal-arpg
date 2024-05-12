@@ -22,7 +22,18 @@ public:
 	class AWeaponActor* GetCurrentWeapon();
 
 	void SetForceAttackMode(bool bForceAttackModeEnabled);
-	bool TryAttack(class ABaseMobType* MobActor);
+
+	/**
+	 * Writes out the mob actors that would be hit, if any, by attacking from the current location with the current rotation and weapon.
+	 * @return true if any mob actors would be hit, false otherwise
+	 */
+	bool TryGetTargetMobActors(TArray<class ABaseMobType*>& OutTargetMobActors);
+
+	/**
+	 * Attacks the target mob actor.
+	 * @return true if the attack was successful, false otherwise
+	 */
+	bool AttackTarget(ABaseMobType* TargetMobActor);
 
 protected:
 	UPROPERTY(Category = "Combat", EditDefaultsOnly)

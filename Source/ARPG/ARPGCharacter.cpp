@@ -75,21 +75,43 @@ void AARPGCharacter::SetForceAttackMode(bool bForceAttackModeEnabled)
 	bIsInForceAttackMode = bForceAttackModeEnabled;
 }
 
-// TODO: Refactor weapon attacks to use line or shape collisions instead of a direct target
-bool AARPGCharacter::TryAttack(ABaseMobType* MobTarget)
+bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobActors)
 {
-	if (MobTarget == nullptr) return false;
-
 	float WeaponAttackRange = CurrentWeapon->GetAttackRange();
-	float DistanceToTarget = (MobTarget->GetActorLocation() - GetActorLocation()).Size();
-	if (DistanceToTarget > WeaponAttackRange) return false;
 
+	FVector Start = GetActorLocation();
+	FVector End = Start + GetActorForwardVector() * WeaponAttackRange;
+
+	FCollisionShape Sphere = FCollisionShape::MakeSphere(5.f);
+	TArray<FHitResult> HitResults;
+	if (!GetWorld()->SweepMultiByChannel(HitResults, Start, End, FQuat::Identity, ECC_GameTraceChannel1, Sphere))
+	{
+		return false;
+	}
+
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.f);
+
+	for (FHitResult HitResult : HitResults)
+	{
+		AActor* HitActor = HitResult.GetActor();
+		OutTargetMobActors.Add(Cast<ABaseMobType>(HitActor));
+	}
+	
+	return true;
+}
+
+// TODO: Make this report more useful info beyond success/failure
+bool AARPGCharacter::AttackTarget(ABaseMobType* TargetMobActor)
+{
 	bIsAttacking = true;
 
 	if (AttackTimer == 0.f && CurrentWeapon)
 	{
 		CurrentWeapon->Swing();
-		// TODO: Damage the target
+		if (TargetMobActor != nullptr)
+		{
+			// TODO: Damage the target
+		}
 	}
 
 	return true;
