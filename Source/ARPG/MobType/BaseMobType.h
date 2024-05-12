@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Internationalization/Text.h"
 
 #include "BaseMobType.generated.h"
 
@@ -30,6 +31,9 @@ public:
 	void ApplyDamage(float DamageAmount);
 
 protected:
+	UPROPERTY(Category = "Identity", EditAnywhere, BlueprintReadWrite)
+	FText MobName;
+
 	UPROPERTY(Category = "Components", VisibleAnywhere, BlueprintReadWrite)
 	class UHealthComponent* HealthComponent;
 
@@ -48,6 +52,9 @@ protected:
 	UPROPERTY(Category = "Effects", EditAnywhere)
 	TSubclassOf<class ADecalActor> BloodSplatterDecalActorClass;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bIsAlive{true};
+
 	class UAudioComponent* WeaponHitSoundComponent;
 
 	TArray<class UMaterialInstanceDynamic*> MaterialInstances;
@@ -56,8 +63,6 @@ protected:
 
 private:
 	class APlayerController* CurrentPlayerController;
-
-	bool bIsAlive{true};
 
 	void SetTextureSampleMultiplier(float Multiplier);
 

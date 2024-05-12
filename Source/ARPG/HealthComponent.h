@@ -25,7 +25,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float MaxHealth{100.f};
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
