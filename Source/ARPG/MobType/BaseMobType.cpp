@@ -107,6 +107,7 @@ void ABaseMobType::ApplyDamage(float DamageAmount)
 		bIsAlive = false;
 		SetTextureSampleMultiplier(1.f);
 		CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
+		SetActorEnableCollision(false);
 		if (MobUI != nullptr) MobUI->OnMobDied(this);
 	}
 }
