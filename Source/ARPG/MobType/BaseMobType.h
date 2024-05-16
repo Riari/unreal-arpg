@@ -52,6 +52,9 @@ protected:
 	UPROPERTY(Category = "Effects", EditAnywhere)
 	TSubclassOf<class ADecalActor> BloodSplatterDecalActorClass;
 
+	UPROPERTY(Category = "UI", VisibleAnywhere, BlueprintReadOnly)
+	class AMobUI* MobUI;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bIsAlive{true};
 

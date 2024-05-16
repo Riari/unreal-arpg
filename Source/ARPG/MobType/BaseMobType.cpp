@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "BaseMobType.h"
 
 #include "Components/AudioComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/DecalActor.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "NiagaraFunctionLibrary.h"
@@ -14,6 +14,7 @@
 #include "Sound/SoundCue.h"
 
 #include "../HealthComponent.h"
+#include "../UI/MobUI.h"
 
 ABaseMobType::ABaseMobType()
 	: WeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("WeaponHitSoundComponent"))}
@@ -43,6 +44,8 @@ void ABaseMobType::BeginPlay()
 	CurrentPlayerController = GetWorld()->GetFirstPlayerController();
 
 	if (WeaponHitSoundCue != nullptr) WeaponHitSoundComponent->SetSound(WeaponHitSoundCue);
+
+	MobUI = Cast<AMobUI>(UGameplayStatics::GetActorOfClass(GetWorld(), AMobUI::StaticClass()));
 }
 
 void ABaseMobType::Tick(float DeltaTime)
@@ -61,6 +64,8 @@ void ABaseMobType::OnMouseOverBegin(UPrimitiveComponent* TouchedComponent)
 
 	CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Crosshairs;
 	SetTextureSampleMultiplier(TextureSampleMultiplierHover);
+
+	if (MobUI != nullptr) MobUI->OnMouseEnterMob(this);
 }
 
 void ABaseMobType::OnMouseOverEnd(UPrimitiveComponent *TouchedComponent)
@@ -69,6 +74,8 @@ void ABaseMobType::OnMouseOverEnd(UPrimitiveComponent *TouchedComponent)
 
 	CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
 	SetTextureSampleMultiplier(1.f);
+
+	if (MobUI != nullptr) MobUI->OnMouseExitMob(this);
 }
 
 void ABaseMobType::PlayWeaponHitSound()
@@ -100,6 +107,7 @@ void ABaseMobType::ApplyDamage(float DamageAmount)
 		bIsAlive = false;
 		SetTextureSampleMultiplier(1.f);
 		CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
+		if (MobUI != nullptr) MobUI->OnMobDied(this);
 	}
 }
 
