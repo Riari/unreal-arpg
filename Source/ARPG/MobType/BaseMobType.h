@@ -58,6 +58,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bIsAlive{true};
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bIsAttacking{false};
+
 	class UAudioComponent* WeaponHitSoundComponent;
 
 	TArray<class UMaterialInstanceDynamic*> MaterialInstances;
