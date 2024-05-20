@@ -105,6 +105,7 @@ void ABaseMobType::ApplyDamage(float DamageAmount)
 	if (HealthComponent->ApplyDamage(DamageAmount))
 	{
 		bIsAlive = false;
+		bIsAttacking = false;
 		SetTextureSampleMultiplier(1.f);
 		CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
 		SetActorEnableCollision(false);
