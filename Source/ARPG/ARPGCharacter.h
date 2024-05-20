@@ -4,10 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
+#include "MortalInterface.h"
+
 #include "ARPGCharacter.generated.h"
 
 UCLASS(Blueprintable)
-class AARPGCharacter : public ACharacter
+class AARPGCharacter : public ACharacter, public IMortalInterface
 {
 	GENERATED_BODY()
 
@@ -36,14 +39,29 @@ public:
 	bool AttackTarget(ABaseMobType* TargetMobActor);
 
 	void PlayWeaponSwingSound();
+	void PlayReceiveMeleeHitSound();
 	void InflictWeaponDamageOnTarget();
+	void Die() override;
+
+	bool IsDead_Implementation() const override;
 
 protected:
+	UPROPERTY(Category = "Components", VisibleAnywhere, BlueprintReadWrite)
+	class UHealthComponent* HealthComponent;
+
 	UPROPERTY(Category = "Combat", EditDefaultsOnly)
 	TSubclassOf<class AWeaponActor> MainHandWeaponClass;
 
 	UPROPERTY(Category = "Combat", VisibleAnywhere, BlueprintReadOnly)
 	bool bIsAttacking{false};
+
+	UPROPERTY(Category = "Effects", EditAnywhere)
+	class USoundCue* ReceiveMeleeHitSoundCue;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool bIsAlive{true};
+
+	class UAudioComponent* ReceiveMeleeHitSoundComponent;
 
 	bool bIsInForceAttackMode{false};
 

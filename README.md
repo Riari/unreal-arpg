@@ -17,9 +17,9 @@ ARPG demo in UE5.
 <br>
 (Will serve as a basis for any additional mobs)
 - [x] Model
-- [ ] Animations
-- [ ] Attacks
-- [ ] AI
+- [x] Animations
+- [x] Basic attack
+- [x] AI
 
 **UI**
 - [x] Basic enemy info

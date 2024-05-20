@@ -2,20 +2,25 @@
 
 #include "ARPGCharacter.h"
 
-#include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
-#include "Components/DecalComponent.h"
+#include "Components/AudioComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/DecalComponent.h"
+#include "Engine/World.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Materials/Material.h"
-#include "Engine/World.h"
+#include "Sound/SoundCue.h"
+#include "UObject/ConstructorHelpers.h"
 
+#include "HealthComponent.h"
 #include "MobType/BaseMobType.h"
 #include "WeaponActor.h"
 
 AARPGCharacter::AARPGCharacter()
+	: HealthComponent{CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"))}
+	, ReceiveMeleeHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("ReceiveMeleeHitSoundComponent"))}
 {
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -47,6 +52,8 @@ AARPGCharacter::AARPGCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	ReceiveMeleeHitSoundComponent->SetupAttachment(RootComponent);
 }
 
 void AARPGCharacter::Tick(float DeltaTime)
@@ -78,6 +85,8 @@ void AARPGCharacter::SetForceAttackMode(bool bForceAttackModeEnabled)
 
 bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobActors)
 {
+	if (!bIsAlive) return false;
+
 	float WeaponAttackRange = CurrentWeapon->GetAttackRange();
 
 	FVector Start = GetActorLocation();
@@ -104,6 +113,8 @@ bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobAc
 // TODO: Make this report more useful info beyond success/failure
 bool AARPGCharacter::AttackTarget(ABaseMobType* TargetMobActor)
 {
+	if (!bIsAlive) return false;
+
 	bIsAttacking = true;
 	CurrentTarget = TargetMobActor;
 	return true;
@@ -116,12 +127,30 @@ void AARPGCharacter::PlayWeaponSwingSound()
 	CurrentWeapon->PlaySwingSound();
 }
 
+void AARPGCharacter::PlayReceiveMeleeHitSound()
+{
+	ReceiveMeleeHitSoundComponent->Play();
+}
+
 void AARPGCharacter::InflictWeaponDamageOnTarget()
 {
-	if (CurrentTarget == nullptr) return;
+	if (CurrentTarget == nullptr || !bIsAlive) return;
 
-	CurrentTarget->PlayWeaponHitSound();
-	CurrentTarget->ApplyDamage(CurrentWeapon->RollDamage());
+	CurrentTarget->PlayReceiveMeleeWeaponHitSound();
+
+	UHealthComponent* TargetHealthComponent = CurrentTarget->FindComponentByClass<UHealthComponent>();
+	if (TargetHealthComponent) TargetHealthComponent->ApplyDamage(CurrentWeapon->RollDamage());
+}
+
+void AARPGCharacter::Die()
+{
+	bIsAlive = false;
+	bIsAttacking = false;
+}
+
+bool AARPGCharacter::IsDead_Implementation() const
+{
+	return !bIsAlive;
 }
 
 void AARPGCharacter::BeginPlay()
@@ -136,4 +165,6 @@ void AARPGCharacter::BeginPlay()
 		CurrentWeapon->SetOwner(this);
 		CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, TEXT("RightHandSocket"));
 	}
+
+	if (ReceiveMeleeHitSoundCue != nullptr) ReceiveMeleeHitSoundComponent->SetSound(ReceiveMeleeHitSoundCue);
 }

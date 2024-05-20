@@ -6,10 +6,12 @@
 #include "GameFramework/Character.h"
 #include "Internationalization/Text.h"
 
+#include "../MortalInterface.h"
+
 #include "BaseMobType.generated.h"
 
 UCLASS()
-class ARPG_API ABaseMobType : public ACharacter
+class ARPG_API ABaseMobType : public ACharacter, public IMortalInterface
 {
 	GENERATED_BODY()
 
@@ -26,9 +28,11 @@ public:
 	UFUNCTION()
 	void OnMouseOverEnd(UPrimitiveComponent* TouchedComponent);
 
-	void PlayWeaponHitSound();
+	void PlayReceiveMeleeWeaponHitSound();
+	void InflictWeaponDamageOnTarget();
+	void Die() override;
 
-	void ApplyDamage(float DamageAmount);
+	bool IsDead_Implementation() const override;
 
 protected:
 	UPROPERTY(Category = "Identity", EditAnywhere, BlueprintReadWrite)
@@ -43,8 +47,11 @@ protected:
 	UPROPERTY(Category = "Appearance", EditAnywhere)
 	TArray<class UMaterialInterface*> Materials;
 
+	UPROPERTY(Category = "Damage Properties", EditAnywhere)
+	FFloatRange BaseMeleeDamage{10.f, 25.f};
+
 	UPROPERTY(Category = "Effects", EditAnywhere)
-	class USoundCue* WeaponHitSoundCue;
+	class USoundCue* ReceiveMeleeWeaponHitSoundCue;
 
 	UPROPERTY(Category = "Effects", EditAnywhere)
 	class UNiagaraSystem* BloodSplashParticleSystem;
@@ -61,11 +68,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bIsAttacking{false};
 
-	class UAudioComponent* WeaponHitSoundComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	ACharacter* CurrentTarget;
+
+	class UAudioComponent* ReceiveMeleeWeaponHitSoundComponent;
 
 	TArray<class UMaterialInstanceDynamic*> MaterialInstances;
 
 	virtual void BeginPlay() override;
+
+	float RollMeleeDamage();
 
 private:
 	class APlayerController* CurrentPlayerController;

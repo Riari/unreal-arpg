@@ -9,20 +9,22 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Materials/MaterialInstanceDynamic.h"
+#include "Math/UnrealMathUtility.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraSystem.h"
 #include "Sound/SoundCue.h"
 
+#include "../ARPGCharacter.h"
 #include "../HealthComponent.h"
 #include "../UI/MobUI.h"
 
 ABaseMobType::ABaseMobType()
-	: WeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("WeaponHitSoundComponent"))}
+	: ReceiveMeleeWeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("ReceiveMeleeWeaponHitSoundComponent"))}
 	, HealthComponent{CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"))}
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	WeaponHitSoundComponent->SetupAttachment(RootComponent);
+	ReceiveMeleeWeaponHitSoundComponent->SetupAttachment(RootComponent);
 }
 
 void ABaseMobType::BeginPlay()
@@ -43,9 +45,14 @@ void ABaseMobType::BeginPlay()
 	
 	CurrentPlayerController = GetWorld()->GetFirstPlayerController();
 
-	if (WeaponHitSoundCue != nullptr) WeaponHitSoundComponent->SetSound(WeaponHitSoundCue);
+	if (ReceiveMeleeWeaponHitSoundCue != nullptr) ReceiveMeleeWeaponHitSoundComponent->SetSound(ReceiveMeleeWeaponHitSoundCue);
 
 	MobUI = Cast<AMobUI>(UGameplayStatics::GetActorOfClass(GetWorld(), AMobUI::StaticClass()));
+}
+
+float ABaseMobType::RollMeleeDamage()
+{
+	return FMath::RandRange(BaseMeleeDamage.GetLowerBoundValue(), BaseMeleeDamage.GetUpperBoundValue());
 }
 
 void ABaseMobType::Tick(float DeltaTime)
@@ -78,11 +85,11 @@ void ABaseMobType::OnMouseOverEnd(UPrimitiveComponent *TouchedComponent)
 	if (MobUI != nullptr) MobUI->OnMouseExitMob(this);
 }
 
-void ABaseMobType::PlayWeaponHitSound()
+void ABaseMobType::PlayReceiveMeleeWeaponHitSound()
 {
 	if (!bIsAlive) return;
 
-	WeaponHitSoundComponent->Play();
+	ReceiveMeleeWeaponHitSoundComponent->Play();
 
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), BloodSplashParticleSystem, GetActorLocation());
 
@@ -98,19 +105,30 @@ void ABaseMobType::PlayWeaponHitSound()
 	}
 }
 
-void ABaseMobType::ApplyDamage(float DamageAmount)
+void ABaseMobType::InflictWeaponDamageOnTarget()
 {
-	if (!bIsAlive) return;
+	if (CurrentTarget == nullptr || !bIsAlive) return;
 
-	if (HealthComponent->ApplyDamage(DamageAmount))
-	{
-		bIsAlive = false;
-		bIsAttacking = false;
-		SetTextureSampleMultiplier(1.f);
-		CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
-		SetActorEnableCollision(false);
-		if (MobUI != nullptr) MobUI->OnMobDied(this);
-	}
+	AARPGCharacter* TargetCharacter = Cast<AARPGCharacter>(CurrentTarget);
+	if (TargetCharacter) TargetCharacter->PlayReceiveMeleeHitSound();
+
+	UHealthComponent* TargetHealthComponent = CurrentTarget->FindComponentByClass<UHealthComponent>();
+	if (TargetHealthComponent) TargetHealthComponent->ApplyDamage(RollMeleeDamage());
+}
+
+void ABaseMobType::Die()
+{
+	bIsAlive = false;
+	bIsAttacking = false;
+	SetTextureSampleMultiplier(1.f);
+	CurrentPlayerController->CurrentMouseCursor = EMouseCursor::Type::Default;
+	SetActorEnableCollision(false);
+	if (MobUI != nullptr) MobUI->OnMobDied(this);
+}
+
+bool ABaseMobType::IsDead_Implementation() const
+{
+    return !bIsAlive;
 }
 
 void ABaseMobType::SetTextureSampleMultiplier(float Multiplier)

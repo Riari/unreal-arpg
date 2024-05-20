@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 
 #include "ARPGGameMode.h"
+#include "MortalInterface.h"
 
 UHealthComponent::UHealthComponent()
 {
@@ -17,19 +18,20 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-bool UHealthComponent::ApplyDamage(float Damage)
+void UHealthComponent::ApplyDamage(float Damage)
 {
-	if (Damage <= 0) return false;
+	if (Damage <= 0) return;
 
 	Health -= Damage;
 
 	if (Health <= 0)
 	{
-		if (GameMode != nullptr) GameMode->ActorDied(GetOwner());
-		return true;
-	}
+		AActor* OwningActor = GetOwner();
+		if (GameMode != nullptr) GameMode->ActorDied(OwningActor);
 
-	return false;
+		IMortalInterface* Mortal = Cast<IMortalInterface>(OwningActor);
+		Mortal->Die();
+	}
 }
 
 void UHealthComponent::BeginPlay()
@@ -37,6 +39,5 @@ void UHealthComponent::BeginPlay()
 	Super::BeginPlay();
 	
 	Health = MaxHealth;
-
 	GameMode = Cast<AARPGGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 }

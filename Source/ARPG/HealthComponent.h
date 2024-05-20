@@ -18,9 +18,10 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	/**
-	 * Applies the given damage amount and returns a bool indicating whether it was a killing blow.
+	 * Applies the given damage amount and notifies the owner of death.
+	 * @param Damage The amount of damage to apply.
 	 */
-	bool ApplyDamage(float Damage);
+	void ApplyDamage(float Damage);
 
 protected:
 	virtual void BeginPlay() override;
