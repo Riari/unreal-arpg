@@ -24,6 +24,8 @@ void UHealthComponent::ApplyDamage(float Damage)
 
 	Health -= Damage;
 
+	OnHealthChangedEvent.Broadcast();
+
 	if (Health <= 0)
 	{
 		AActor* OwningActor = GetOwner();

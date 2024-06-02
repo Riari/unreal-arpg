@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthChangedDelegate);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ARPG_API UHealthComponent : public UActorComponent
@@ -25,6 +26,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+    UPROPERTY(BlueprintAssignable)
+    FHealthChangedDelegate OnHealthChangedEvent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float MaxHealth{100.f};
