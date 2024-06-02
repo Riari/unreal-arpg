@@ -15,6 +15,7 @@
 
 #include "ARPGCharacter.h"
 #include "MobType/BaseMobType.h"
+#include "MortalInterface.h"
 #include "WeaponActor.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -112,9 +113,9 @@ void AARPGPlayerController::OnInputStarted()
 // Triggered every frame when the input is held down
 void AARPGPlayerController::OnPrimaryActionTriggered()
 {
-	FollowTime += GetWorld()->GetDeltaSeconds();
+	if (ControlledPawn == nullptr || IMortalInterface::Execute_IsDead(ControlledPawn)) return;
 
-	if (ControlledPawn == nullptr) return;
+	FollowTime += GetWorld()->GetDeltaSeconds();
 
 	FVector WorldDirection = (CachedDestination - ControlledPawn->GetActorLocation()).GetSafeNormal();
 	FRotator Rotation = FRotator(0.f, WorldDirection.Rotation().Yaw, 0.f);
@@ -126,7 +127,6 @@ void AARPGPlayerController::OnPrimaryActionTriggered()
 
 	if (bIsInForceAttackMode)
 	{
-		StopMovement();
 		ControlledPawn->AttackTarget(TargetMobActors.Num() > 0 ? TargetMobActors[0] : nullptr);
 		return;
 	}
@@ -135,7 +135,6 @@ void AARPGPlayerController::OnPrimaryActionTriggered()
 	{
 		if (TargetMobActor == CurrentTargetMobActor)
 		{
-			StopMovement();
 			ControlledPawn->AttackTarget(TargetMobActor);
 			return;
 		}
@@ -147,6 +146,8 @@ void AARPGPlayerController::OnPrimaryActionTriggered()
 
 void AARPGPlayerController::OnPrimaryActionReleased()
 {
+	if (ControlledPawn == nullptr || IMortalInterface::Execute_IsDead(ControlledPawn)) return;
+
 	if (bIsInForceAttackMode) return;
 
 	// If it was a short press
