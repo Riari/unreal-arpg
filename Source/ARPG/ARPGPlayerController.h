@@ -13,6 +13,7 @@ class UInputMappingContext;
 class UInputAction;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEquipPanelToggledDelegate);
 
 UCLASS()
 class AARPGPlayerController : public APlayerController
@@ -59,6 +60,8 @@ protected:
 
 	void OnForceAttackStarted();
 	void OnForceAttackEnded();
+
+	void OnToggleEquipPanel();
 
 private:
 	FVector CachedDestination;

@@ -23,12 +23,12 @@ ARPG demo in UE5.
 
 **UI**
 - [x] Basic enemy info
-- [ ] Player health
+- [x] Player health
 - [ ] Player mana
-- [ ] Character & inventory window
-- [ ] Stats window
-- [ ] Abilities window
-- [ ] Quest window
+- [ ] Equipment panel
+- [ ] Stats panel
+- [ ] Abilities panel
+- [ ] Quest panel
 
 **Quests**
 - [ ] Quest system
