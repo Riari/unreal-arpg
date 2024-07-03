@@ -14,6 +14,8 @@ class ARPG_API UItemDataAsset : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
 
+	FPrimaryAssetId GetPrimaryAssetId() const override { return FPrimaryAssetId("ItemDataAssets", GetFName()); } 
+
 public:
 	UFUNCTION(BlueprintCallable)
 	FName GetName() const;
@@ -25,7 +27,7 @@ public:
 	int GetInventoryHeight() const;
 
 	UFUNCTION(BlueprintCallable)
-	UTexture* GetIconTexture() const;
+	UTexture2D* GetIconTexture() const;
 
 	UFUNCTION(BlueprintCallable)
 	UStaticMesh* GetMesh() const;
@@ -41,7 +43,7 @@ protected:
 	int InventoryHeight;
 
 	UPROPERTY(EditAnywhere, Category = Visuals)
-	UTexture* IconTexture;
+	UTexture2D* IconTexture;
 
 	UPROPERTY(EditAnywhere, Category = Visuals)
 	UStaticMesh* Mesh;

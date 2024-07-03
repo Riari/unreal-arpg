@@ -18,7 +18,7 @@ int UItemDataAsset::GetInventoryHeight() const
     return InventoryHeight;
 }
 
-UTexture* UItemDataAsset::GetIconTexture() const
+UTexture2D* UItemDataAsset::GetIconTexture() const
 {
     return IconTexture;
 }

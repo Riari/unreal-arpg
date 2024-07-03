@@ -4,11 +4,35 @@
 #include "EquipmentPanel.h"
 
 #include "../Data/ItemDataAsset.h"
+#include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
 #include "Components/GridPanel.h"
 #include "Components/Image.h"
 
-void UEquipmentPanel::CreateSlots(UGridPanel* InventoryGrid)
+void UEquipmentPanel::AddItemToInventory(UItemDataAsset* ItemData)
+{
+    if (InventoryItemsCanvas == nullptr)
+    {
+        UE_LOG(LogTemp, Error, TEXT("UEquipmentPanel: InventoryItemsCanvas is null! Ensure there is a UCanvasPanel widget of this name exposed as a variable."));
+        return;
+    }
+
+    UImage* ItemIcon = NewObject<UImage>(this, UImage::StaticClass());
+    UTexture2D* ItemTexture = ItemData->GetIconTexture();
+    ItemIcon->SetBrushFromTexture(ItemTexture, true);
+    UCanvasPanelSlot* CanvasPanelSlot = InventoryItemsCanvas->AddChildToCanvas(ItemIcon);
+    CanvasPanelSlot->SetSize(FVector2D(ItemTexture->GetSurfaceWidth(), ItemTexture->GetSurfaceHeight()));
+}
+
+void UEquipmentPanel::NativeConstruct()
+{
+    Super::NativeConstruct();
+
+    CreateSlots();
+}
+
+void UEquipmentPanel::CreateSlots()
 {
     if (SlotWidgetClass == nullptr)
     {
@@ -18,7 +42,7 @@ void UEquipmentPanel::CreateSlots(UGridPanel* InventoryGrid)
 
     if (InventoryGrid == nullptr)
     {
-        UE_LOG(LogTemp, Error, TEXT("UEquipmentPanel: InventoryGrid is null! Ensure there is a GridPanel widget of this name exposed as a variable."));
+        UE_LOG(LogTemp, Error, TEXT("UEquipmentPanel: InventoryGrid is null! Ensure there is a UGridPanel widget of this name exposed as a variable."));
         return;
     }
 
@@ -29,17 +53,4 @@ void UEquipmentPanel::CreateSlots(UGridPanel* InventoryGrid)
         UUserWidget* SlotWidget = CreateWidget<UUserWidget>(GetWorld(), SlotWidgetClass);
         InventoryGrid->AddChildToGrid(SlotWidget, y, x);
     }
-}
-
-void UEquipmentPanel::AddItemToInventory(UItemDataAsset* ItemData)
-{
-    if (InventoryItemsContainer == nullptr)
-    {
-        UE_LOG(LogTemp, Error, TEXT("UEquipmentPanel: InventoryItemsContainer is null! Ensure there is a CanvasPanel widget of this name exposed as a variable."));
-        return;
-    }
-
-    UImage* ItemIcon = ConstructObject<UImage>(UImage::StaticClass());
-    ItemIcon->SetBrushFromTexture(ItemData->GetIconTexture(), true);
-    InventoryItemsContainer->AddChildToCanvas(ItemIcon);
 }
