@@ -16,7 +16,6 @@
 #include "ARPGCharacter.h"
 #include "MobType/BaseMobType.h"
 #include "MortalInterface.h"
-#include "WeaponActor.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 

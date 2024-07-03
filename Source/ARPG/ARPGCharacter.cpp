@@ -85,7 +85,7 @@ void AARPGCharacter::SetForceAttackMode(bool bForceAttackModeEnabled)
 
 bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobActors)
 {
-	if (!bIsAlive) return false;
+	if (!bIsAlive || !CurrentWeapon) return false;
 
 	float WeaponAttackRange = CurrentWeapon->GetAttackRange();
 
@@ -159,7 +159,7 @@ void AARPGCharacter::BeginPlay()
 
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	CurrentWeapon = GetWorld()->SpawnActor<AWeaponActor>(MainHandWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+	// CurrentWeapon = GetWorld()->SpawnActor<AWeaponActor>(MainHandWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
 	if (CurrentWeapon)
 	{
 		CurrentWeapon->SetOwner(this);
