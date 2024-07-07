@@ -3,12 +3,14 @@
 
 #include "EquipmentPanel.h"
 
-#include "../Data/ItemDataAsset.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
 #include "Components/GridPanel.h"
 #include "Components/Image.h"
+
+#include "../Data/ItemDataAsset.h"
+#include "Item.h"
 
 void UEquipmentPanel::AddItemToInventory(UItemDataAsset* ItemData)
 {
@@ -18,11 +20,16 @@ void UEquipmentPanel::AddItemToInventory(UItemDataAsset* ItemData)
         return;
     }
 
-    UImage* ItemIcon = NewObject<UImage>(this, UImage::StaticClass());
+    if (ItemWidgetClass == nullptr)
+    {
+        UE_LOG(LogTemp, Error, TEXT("UEquipmentPanel: ItemWidgetClass is null!"));
+        return;
+    }
+
+    UItem* ItemWidget = CreateWidget<UItem>(GetWorld(), ItemWidgetClass);
     UTexture2D* ItemTexture = ItemData->GetIconTexture();
-    ItemIcon->SetBrushFromTexture(ItemTexture, true);
-    UCanvasPanelSlot* CanvasPanelSlot = InventoryItemsCanvas->AddChildToCanvas(ItemIcon);
-    CanvasPanelSlot->SetSize(FVector2D(ItemTexture->GetSurfaceWidth(), ItemTexture->GetSurfaceHeight()));
+    ItemWidget->SetIconTexture(ItemTexture);
+    UCanvasPanelSlot* CanvasPanelSlot = InventoryItemsCanvas->AddChildToCanvas(ItemWidget);
 }
 
 void UEquipmentPanel::NativeConstruct()
