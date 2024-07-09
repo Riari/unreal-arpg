@@ -15,12 +15,15 @@ class ARPG_API UItem : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	void SetIconTexture(TObjectPtr<UTexture2D> texture);
+	void Init(TObjectPtr<class UItemDataAsset> Data);
 
 protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	TObjectPtr<class UButton> BackgroundButton;
+	TObjectPtr<class UBorder> IconContainer;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	TObjectPtr<class UImage> IconImage;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<class UItemDataAsset> ItemData;
 };

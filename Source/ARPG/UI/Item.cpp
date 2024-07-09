@@ -5,7 +5,10 @@
 
 #include "Components/Image.h"
 
-void UItem::SetIconTexture(TObjectPtr<UTexture2D> texture)
+#include "../Data/ItemDataAsset.h"
+
+void UItem::Init(TObjectPtr<UItemDataAsset> Data)
 {
-    IconImage->SetBrushFromTexture(texture, true);
+    ItemData = Data;
+    IconImage->SetBrushFromTexture(Data->GetIconTexture(), true);
 }

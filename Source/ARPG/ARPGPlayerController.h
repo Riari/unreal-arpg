@@ -44,6 +44,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* ForceAttackAction;
 
+	FVector2D GetCursorPosition();
+
 	virtual void PlayerTick(float DeltaTime) override;
 
 protected:

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Layout/Geometry.h"
 #include "Math/IntPoint.h"
 #include "Templates/UniquePtr.h"
 
@@ -18,6 +19,17 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddItemToInventory(class UItemDataAsset* ItemData);
 
+	UFUNCTION(BlueprintCallable)
+	void OnDraggedItemEnter(class UItemDataAsset* ItemData);
+
+	UFUNCTION(BlueprintCallable)
+	void OnDraggingCancelled();
+
+	UFUNCTION(BlueprintCallable)
+	float GetInventoryGridCellSize() const;
+
+	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int InventorySlotCount{72};
@@ -32,6 +44,9 @@ protected:
 	TSubclassOf<UUserWidget> SlotWidgetClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> SlotHoverWidgetClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> ItemWidgetClass;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -39,6 +54,13 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	TObjectPtr<class UCanvasPanel> InventoryItemsCanvas;
+
+	UPROPERTY(BlueprintReadWrite)
+	FVector2D InventoryGridDragPosition;
+
+	TObjectPtr<UUserWidget> SlotHoverWidget;
+	TObjectPtr<UItemDataAsset> DraggedItemData;
+	bool bIsDragging{false};
 
 	void NativeConstruct() override;
 

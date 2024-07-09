@@ -34,6 +34,19 @@ void AARPGPlayerController::BeginPlay()
 	ControlledPawn = Cast<AARPGCharacter>(GetPawn());
 }
 
+FVector2D AARPGPlayerController::GetCursorPosition()
+{
+	FVector2D CursorPosition{0.f};
+
+	UGameViewportClient* ViewportClient = GetWorld()->GetGameViewport();
+	if (ViewportClient)
+	{
+		ViewportClient->GetMousePosition(CursorPosition);
+	}
+
+	return CursorPosition;
+}
+
 void AARPGPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
