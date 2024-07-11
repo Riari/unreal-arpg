@@ -19,8 +19,8 @@
 #include "../UI/MobUI.h"
 
 ABaseMobType::ABaseMobType()
-	: ReceiveMeleeWeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("ReceiveMeleeWeaponHitSoundComponent"))}
-	, HealthComponent{CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"))}
+	: HealthComponent{CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"))}
+	, ReceiveMeleeWeaponHitSoundComponent{CreateDefaultSubobject<UAudioComponent>(TEXT("ReceiveMeleeWeaponHitSoundComponent"))}
 {
 	PrimaryActorTick.bCanEverTick = true;
 

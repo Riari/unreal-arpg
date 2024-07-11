@@ -30,9 +30,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetCellLocalSize() const;
 
-	UFUNCTION(BlueprintCallable)
-	float GetCellDrawSize() const;
-
 	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
 
 protected:

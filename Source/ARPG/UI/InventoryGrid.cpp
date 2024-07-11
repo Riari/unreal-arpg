@@ -35,11 +35,11 @@ void UInventoryGrid::AddItemToInventory(UItemDataAsset* ItemData)
 void UInventoryGrid::OnDraggedItemEnter(UItemDataAsset* ItemData)
 {
     bIsDragging = true;
-    float CellLocalSize = GetCellLocalSize();
-    SlotHoverWidgetCanvasSlot->SetSize(FVector2D(CellLocalSize * ItemData->GetInventoryWidth(), CellLocalSize * ItemData->GetInventoryHeight()));
+    float CellSize = GetCellLocalSize();
+    SlotHoverWidgetCanvasSlot->SetSize(FVector2D(CellSize * ItemData->GetInventoryWidth(), CellSize * ItemData->GetInventoryHeight()));
     SlotHoverWidget->SetVisibility(ESlateVisibility::Visible);
     UE_LOG(LogTemp, Warning, TEXT("OnDraggedItemEnter"));
-    UE_LOG(LogTemp, Warning, TEXT("Item is %fx%f"), ItemData->GetInventoryWidth() * CellLocalSize, ItemData->GetInventoryHeight() * CellLocalSize);
+    UE_LOG(LogTemp, Warning, TEXT("Item is %fx%f"), ItemData->GetInventoryWidth() * CellSize, ItemData->GetInventoryHeight() * CellSize);
 }
 
 void UInventoryGrid::OnDraggingCancelled()
@@ -58,13 +58,6 @@ float UInventoryGrid::GetCellLocalSize() const
     return GridSize.X / InventorySlotsPerRow;
 }
 
-float UInventoryGrid::GetCellDrawSize() const
-{
-    FGeometry GridGeometry = InventoryGrid->GetCachedGeometry();
-    FVector2D GridSize = GridGeometry.GetDrawSize();
-    return GridSize.X / InventorySlotsPerRow;
-}
-
 void UInventoryGrid::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
 {
     Super::NativeTick(MyGeometry, DeltaTime);
@@ -72,10 +65,9 @@ void UInventoryGrid::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
     if (!bIsDragging) return;
 
     FGeometry InventoryGeometry = InventoryGrid->GetCachedGeometry();
-    FVector2D AbsolutePosition = InventoryGeometry.GetAbsolutePosition();
-    float CellDrawSize = GetCellDrawSize();
-    float GridX = AbsolutePosition.X + (FMath::Floor(InventoryGridDragPosition.X / CellDrawSize) * CellDrawSize);
-    float GridY = AbsolutePosition.Y + (FMath::Floor(InventoryGridDragPosition.Y / CellDrawSize) * CellDrawSize);
+    float CellSize = GetCellLocalSize();
+    float GridX = FMath::Floor(InventoryGridDragPosition.X / CellSize) * CellSize;
+    float GridY = FMath::Floor(InventoryGridDragPosition.Y / CellSize) * CellSize;
 
     SlotHoverWidgetCanvasSlot->SetPosition(FVector2D(GridX, GridY));
 }
