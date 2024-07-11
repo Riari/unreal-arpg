@@ -70,5 +70,237 @@
 			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\ItemDataAsset.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\ItemDataAsset.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\WeaponDataAsset.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\WeaponDataAsset.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\HealthComponent.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\HealthComponent.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MobType\\BaseMobType.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MobType\\BaseMobType.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MobType\\BaseMobTypeAIController.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MobType\\BaseMobTypeAIController.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MobType\\MobMeleeAttackHitAnimNotify.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MobType\\MobMeleeAttackHitAnimNotify.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MortalInterface.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\MortalInterface.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\EquipmentPanel.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\EquipmentPanel.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventoryGrid.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventoryGrid.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventorySlotHover.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventorySlotHover.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\Item.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\Item.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\MobUI.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\WeaponActor.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\WeaponActor.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\WeaponHitAnimNotify.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\WeaponHitAnimNotify.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\WeaponSwingAnimNotify.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\WeaponSwingAnimNotify.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_Default\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
 	}
 ]
