@@ -15,14 +15,14 @@ class ARPG_API UItem : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	void Init(TObjectPtr<class UItemDataAsset> Data);
+	void Init(TObjectPtr<class UItemDataAsset> Data, float CellSize);
 
 protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	TObjectPtr<class UBorder> IconContainer;
+	TObjectPtr<class UBorder> Border;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	TObjectPtr<class UImage> IconImage;
+	TObjectPtr<class UImage> Icon;
 
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<class UItemDataAsset> ItemData;

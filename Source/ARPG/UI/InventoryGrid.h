@@ -6,8 +6,34 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/SizeBox.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Containers/Array.h"
+#include "Math/IntRect.h"
+
 #include "InventorySlotHover.h"
+#include "Item.h"
+
 #include "InventoryGrid.generated.h"
+
+USTRUCT(BlueprintType)
+struct FInventoryItem
+{
+    GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
+	TObjectPtr<UItemDataAsset> ItemData;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
+	TObjectPtr<UItem> Widget;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
+	TObjectPtr<UCanvasPanelSlot> CanvasPanelSlot;
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
+    int X; // Top-left X coordinate in the grid
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
+    int Y; // Top-left Y coordinate in the grid
+};
 
 /**
  * 
@@ -34,13 +60,10 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int InventorySlotCount{72};
+	int GridWidth{12};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int InventorySlotsPerRow{12};
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TMap<FIntPoint, class UItemDataAsset*> Inventory;
+	int GridHeight{6};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> SlotWidgetClass;
@@ -52,7 +75,7 @@ protected:
 	TSubclassOf<UUserWidget> ItemWidgetClass;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	TObjectPtr<class UUniformGridPanel> InventoryGrid;
+	TObjectPtr<class UUniformGridPanel> SlotGrid;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	TObjectPtr<class UCanvasPanel> InventoryItemsCanvas;
@@ -63,9 +86,16 @@ protected:
 	TObjectPtr<UInventorySlotHover> SlotHoverWidget;
 	TObjectPtr<UCanvasPanelSlot> SlotHoverWidgetCanvasSlot;
 	TObjectPtr<UItemDataAsset> DraggedItemData;
+	FBox2f DraggedItemDropArea;
 	bool bIsDragging{false};
 
-	void NativeConstruct() override;
+	TArray<TArray<TSharedPtr<FInventoryItem>>> Grid;
 
+	void NativeOnInitialized() override;
+
+	void InitializeGrid();
 	void CreateSlots();
+
+	bool IsSlotAvailable(int X, int Y) const;
+	bool CanItemBePlacedAt(int X, int Y, UItemDataAsset* ItemData) const;
 };
