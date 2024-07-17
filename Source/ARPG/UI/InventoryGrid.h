@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Components/SizeBox.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Components/SizeBox.h"
 #include "Containers/Array.h"
 #include "Math/IntRect.h"
 
@@ -54,7 +54,10 @@ public:
 	void OnDraggingCancelled();
 
 	UFUNCTION(BlueprintCallable)
-	float GetCellLocalSize() const;
+	float GetSlotLocalSize() const;
+
+	UFUNCTION(BlueprintCallable)
+	float GetSlotDrawSize() const;
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
 

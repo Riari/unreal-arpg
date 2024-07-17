@@ -27,21 +27,22 @@ void UInventoryGrid::AddItemToInventory(UItemDataAsset* ItemData)
         return;
     }
 
-    for (int X = 0; X < GridWidth; ++X)
+    int ItemWidth = ItemData->GetInventoryWidth();
+    int ItemHeight = ItemData->GetInventoryHeight();
+    float SlotSize = GetSlotLocalSize();
+    UE_LOG(LogTemp, Log, TEXT("Slot size is %f"), SlotSize);
+
+    for (int Y = 0; Y < GridHeight; ++Y)
     {
-        for (int Y = 0; Y < GridHeight; ++Y)
+        for (int X = 0; X < GridWidth; ++X)
         {
             if (!CanItemBePlacedAt(X, Y, ItemData)) continue;
 
-            int ItemWidth = ItemData->GetInventoryWidth();
-            int ItemHeight = ItemData->GetInventoryHeight();
-            float CellSize = GetCellLocalSize();
-
             UItem* ItemWidget = CreateWidget<UItem>(GetWorld(), ItemWidgetClass);
             UCanvasPanelSlot* CanvasPanelSlot = InventoryItemsCanvas->AddChildToCanvas(ItemWidget);
-            CanvasPanelSlot->SetPosition(FVector2D(X * CellSize, Y * CellSize));
-            CanvasPanelSlot->SetSize(FVector2D(ItemWidth * CellSize, ItemHeight * CellSize));
-            ItemWidget->Init(ItemData, CellSize);
+            CanvasPanelSlot->SetPosition(FVector2D(X * SlotSize, Y * SlotSize));
+            CanvasPanelSlot->SetSize(FVector2D(ItemWidth * SlotSize, ItemHeight * SlotSize));
+            ItemWidget->Init(ItemData, SlotSize);
 
             TSharedPtr<FInventoryItem> InventoryItem = MakeShared<FInventoryItem>();
             InventoryItem->ItemData = ItemData;
@@ -59,8 +60,7 @@ void UInventoryGrid::AddItemToInventory(UItemDataAsset* ItemData)
             }
 
             UE_LOG(LogTemp, Log, TEXT("UInventoryGrid: Item placed at %d, %d"), X, Y);
-
-            break;
+            return;
         }
     }
 }
@@ -70,8 +70,8 @@ void UInventoryGrid::OnDraggedItemEnter(UItemDataAsset* ItemData)
     bIsDragging = true;
     DraggedItemData = ItemData;
 
-    float CellSize = GetCellLocalSize();
-    SlotHoverWidgetCanvasSlot->SetSize(FVector2D(CellSize * ItemData->GetInventoryWidth(), CellSize * ItemData->GetInventoryHeight()));
+    float SlotSize = GetSlotLocalSize();
+    SlotHoverWidgetCanvasSlot->SetSize(FVector2D(SlotSize * ItemData->GetInventoryWidth(), SlotSize * ItemData->GetInventoryHeight()));
     SlotHoverWidget->SetVisibility(ESlateVisibility::Visible);
 }
 
@@ -82,11 +82,18 @@ void UInventoryGrid::OnDraggingCancelled()
     bIsDragging = false;
 }
 
-float UInventoryGrid::GetCellLocalSize() const
+float UInventoryGrid::GetSlotLocalSize() const
 {
-    FGeometry GridGeometry = SlotGrid->GetCachedGeometry();
-    FVector2D GridSize = GridGeometry.GetLocalSize();
-    return GridSize.X / GridWidth;
+    FGeometry SlotGeometry = SlotGrid->GetCachedGeometry();
+    float SlotSize = SlotGeometry.GetLocalSize().X;
+    return SlotSize / GridWidth;
+}
+
+float UInventoryGrid::GetSlotDrawSize() const
+{
+    FGeometry SlotGeometry = SlotGrid->GetCachedGeometry();
+    float SlotSize = SlotGeometry.GetDrawSize().X;
+    return SlotSize / GridWidth;
 }
 
 void UInventoryGrid::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
@@ -98,23 +105,22 @@ void UInventoryGrid::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
     int ItemSlotWidth = DraggedItemData->GetInventoryWidth();
     int ItemSlotHeight = DraggedItemData->GetInventoryHeight();
 
-    FGeometry InventoryGeometry = SlotGrid->GetCachedGeometry();
-    float CellSize = GetCellLocalSize();
-    float GridMinX = FMath::Floor(InventoryGridDragPosition.X / CellSize) * CellSize;
-    float GridMinY = FMath::Floor(InventoryGridDragPosition.Y / CellSize) * CellSize;
-    float GridMaxX = GridMinX + (ItemSlotWidth * CellSize);
-    float GridMaxY = GridMinY + (ItemSlotHeight * CellSize);
+    float SlotSize = GetSlotLocalSize();
+    float GridMinX = FMath::Floor(InventoryGridDragPosition.X / SlotSize) * SlotSize;
+    float GridMinY = FMath::Floor(InventoryGridDragPosition.Y / SlotSize) * SlotSize;
+    float GridMaxX = GridMinX + (ItemSlotWidth * SlotSize);
+    float GridMaxY = GridMinY + (ItemSlotHeight * SlotSize);
 
-    if (ItemSlotWidth % 2 == 0)
+    if (ItemSlotWidth % 2 != 0)
     {
-        GridMinX -= CellSize / 2.f;
-        GridMaxX -= CellSize / 2.f;
+        GridMinX -= (ItemSlotWidth / 2) * SlotSize;
+        GridMaxX -= (ItemSlotWidth / 2) * SlotSize;
     }
 
-    if (ItemSlotHeight % 2 == 0)
+    if (ItemSlotHeight % 2 != 0)
     {
-        GridMinY -= CellSize / 2.f;
-        GridMaxY -= CellSize / 2.f;
+        GridMinY -= (ItemSlotHeight / 2) * SlotSize;
+        GridMaxY -= (ItemSlotHeight / 2) * SlotSize;
     }
 
     DraggedItemDropArea.Min = {GridMinX, GridMinY};
@@ -136,8 +142,6 @@ void UInventoryGrid::NativeOnInitialized()
 
 void UInventoryGrid::InitializeGrid()
 {
-    UE_LOG(LogTemp, Log, TEXT("UInventoryGrid: Initializing grid with dimensions %d x %d."), GridWidth, GridHeight);
-
     Grid.SetNum(GridWidth);
     for (int X = 0; X < GridWidth; ++X)
     {
@@ -171,6 +175,11 @@ void UInventoryGrid::CreateSlots()
             SlotGrid->AddChildToUniformGrid(SlotWidget, Y, X);
         }
     }
+
+    SlotGrid->SynchronizeProperties();
+    SlotGrid->ForceLayoutPrepass();
+
+    UE_LOG(LogTemp, Log, TEXT("UInventoryGrid: Slots created!"));
 }
 
 bool UInventoryGrid::IsSlotAvailable(int X, int Y) const
