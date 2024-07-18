@@ -4,18 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "Item.generated.h"
+
+#include "ARPG/Data/Runtime/ItemInstance.h"
+
+#include "InventoryItem.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ARPG_API UItem : public UUserWidget
+class ARPG_API UInventoryItem : public UUserWidget
 {
 	GENERATED_BODY()
 
 public:
-	void Init(TObjectPtr<class UItemDataAsset> Data, float CellSize);
+	void Init(UItemInstance* InItem, float CellSize);
 
 protected:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -25,5 +28,5 @@ protected:
 	TObjectPtr<class UImage> Icon;
 
 	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<class UItemDataAsset> ItemData;
+	TObjectPtr<class UItemInstance> Item;
 };

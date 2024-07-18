@@ -9,21 +9,22 @@
 #include "Containers/Array.h"
 #include "Math/IntRect.h"
 
+#include "ARPG/Data/Runtime/ItemInstance.h"
+#include "InventoryItem.h"
 #include "InventorySlotHover.h"
-#include "Item.h"
 
 #include "InventoryGrid.generated.h"
 
 USTRUCT(BlueprintType)
-struct FInventoryItem
+struct FInventoryItemInstance
 {
     GENERATED_BODY()
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
-	TObjectPtr<UItemDataAsset> ItemData;
+	TObjectPtr<UItemInstance> Item;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
-	TObjectPtr<UItem> Widget;
+	TObjectPtr<UInventoryItem> Widget;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory")
 	TObjectPtr<UCanvasPanelSlot> CanvasPanelSlot;
@@ -45,10 +46,16 @@ class ARPG_API UInventoryGrid : public UUserWidget
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void AddItemToInventory(class UItemDataAsset* ItemData);
+	void CreateItemInInventory(UItemDataAsset* ItemData, int Quantity);
 
 	UFUNCTION(BlueprintCallable)
-	void OnDraggedItemEnter(class UItemDataAsset* ItemData);
+	void AddItemToInventory(UItemInstance* Item);
+
+	UFUNCTION(BlueprintCallable)
+	void OnDraggedItemEnter(UItemInstance* Item);
+
+	UFUNCTION(BLueprintCallable)
+	void OnDraggedItemDrop();
 
 	UFUNCTION(BlueprintCallable)
 	void OnDraggingCancelled();
@@ -88,11 +95,12 @@ protected:
 
 	TObjectPtr<UInventorySlotHover> SlotHoverWidget;
 	TObjectPtr<UCanvasPanelSlot> SlotHoverWidgetCanvasSlot;
-	TObjectPtr<UItemDataAsset> DraggedItemData;
+	TObjectPtr<UItemInstance> DraggedItem;
 	FBox2f DraggedItemDropArea;
+	FIntRect DraggedItemDropCoordinates;
 	bool bIsDragging{false};
 
-	TArray<TArray<TSharedPtr<FInventoryItem>>> Grid;
+	TArray<TArray<TSharedPtr<FInventoryItemInstance>>> Grid;
 
 	void NativeOnInitialized() override;
 
@@ -100,5 +108,5 @@ protected:
 	void CreateSlots();
 
 	bool IsSlotAvailable(int X, int Y) const;
-	bool CanItemBePlacedAt(int X, int Y, UItemDataAsset* ItemData) const;
+	bool CanItemBePlacedAt(int X, int Y, UItemInstance* Item) const;
 };
