@@ -165,10 +165,9 @@ void UInventoryGrid::NativeTick(const FGeometry& MyGeometry, float DeltaTime)
     {
         for (int Y = DraggedItemDropCoordinates.Min.Y; Y <= DraggedItemDropCoordinates.Max.Y; ++Y)
         {
-            if (!IsSlotAvailable(X, Y))
-            {
-                OverlappedItemIDs.Add(Grid[X][Y]->Item->GetID());
-            }
+            if (!IsSlotValid(X, Y) || IsSlotAvailable(X, Y)) continue;
+
+            OverlappedItemIDs.Add(Grid[X][Y]->Item->GetID());
         }
     }
 
@@ -229,9 +228,14 @@ void UInventoryGrid::CreateSlots()
     UE_LOG(LogTemp, Log, TEXT("UInventoryGrid: Slots created!"));
 }
 
+bool UInventoryGrid::IsSlotValid(int X, int Y) const
+{
+    return X >= 0 && Y >= 0 && Grid.Num() > X && Grid[X].Num() > Y;
+}
+
 bool UInventoryGrid::IsSlotAvailable(int X, int Y) const
 {
-    return X >= 0 && Y >= 0 && Grid.Num() > X && Grid[X].Num() > Y && Grid[X][Y] == nullptr;
+    return Grid[X][Y] == nullptr;
 }
 
 bool UInventoryGrid::CanItemBePlacedAt(int X, int Y, UItemInstance* Item) const
@@ -245,7 +249,7 @@ bool UInventoryGrid::CanItemBePlacedAt(int X, int Y, UItemInstance* Item) const
     {
         for (int j = Y; j < Y + ItemHeight; ++j)
         {
-            if (!IsSlotAvailable(i, j)) return false;
+            if (!IsSlotValid(i, j) || !IsSlotAvailable(i, j)) return false;
         }
     }
 

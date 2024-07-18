@@ -107,6 +107,7 @@ protected:
 	void InitializeGrid();
 	void CreateSlots();
 
+	bool IsSlotValid(int X, int Y) const;
 	bool IsSlotAvailable(int X, int Y) const;
 	bool CanItemBePlacedAt(int X, int Y, UItemInstance* Item) const;
 };
