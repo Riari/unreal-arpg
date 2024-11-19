@@ -506,6 +506,6 @@
 /I "C:\Program Files\Epic Games\UE_5.4\Engine\Source\ThirdParty\LibTiff\Source" 
 /I "C:\Program Files\Epic Games\UE_5.4\Engine\Source\ThirdParty\Windows\PIX\include" 
 /I "C:\Program Files\Epic Games\UE_5.4\Engine\Source\ThirdParty\NVIDIA\CUDA" 
-/I "C:\Program Files\Epic Games\UE_5.4\Engine\Source\ThirdParty\Vulkan\Include" 
-/I "C:\Program Files\Epic Games\UE_5.4\Engine\Source\ThirdParty\Vulkan\Include\vulkan" 
+/I "C:\Dev\VulkanSDK\1.3.290.0\Include" 
+/I "C:\Dev\VulkanSDK\1.3.290.0\Include\vulkan" 
 /I "C:\Program Files\Epic Games\UE_5.4\Engine\Source\ThirdParty\Vulkan\profiles\include" 

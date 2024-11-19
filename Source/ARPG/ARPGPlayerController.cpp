@@ -9,9 +9,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/Pawn.h"
 #include "GenericPlatform/ICursor.h"
-#include "InputActionValue.h"
 #include "NiagaraFunctionLibrary.h"
-#include "NiagaraSystem.h"
 
 #include "ARPGCharacter.h"
 #include "MobType/BaseMobType.h"

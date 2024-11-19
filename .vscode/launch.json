@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach",
+            "request": "attach",
+            "type": "lldb",
+            "pid": "${command:pickProcess}",
+            "visualizerFile": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
+            "sourceFileMap": {
+                "D:\\build\\++UE5\\Sync": "C:\\Program Files\\Epic Games\\UE_5.4"
+            }
+        }
+    ]
+}

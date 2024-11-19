@@ -1,0 +1,50 @@
+{
+    "version" : "0.0.2",
+    "_comment": "dont forget to escape backslashes in EnginePath",
+    "EngineDir": "C:\\Program Files\\Epic Games\\UE_5.4",
+    "Targets":  [
+        {
+            "TargetName" : "ARPG-Editor",
+            "Configuration" : "DebugGame",
+            "withEditor" : true,
+            "UbtExtraFlags" : "",
+            "PlatformName" : "Win64"
+        },
+        {
+            "TargetName" : "ARPG",
+            "Configuration" : "DebugGame",
+            "withEditor" : false,
+            "UbtExtraFlags" : "",
+            "PlatformName" : "Win64"
+        },
+        {
+            "TargetName" : "ARPG-Editor",
+            "Configuration" : "Development",
+            "withEditor" : true,
+            "UbtExtraFlags" : "",
+            "PlatformName" : "Win64"
+        },
+        {
+            "TargetName" : "ARPG",
+            "Configuration" : "Development",
+            "withEditor" : false,
+            "UbtExtraFlags" : "",
+            "PlatformName" : "Win64"
+        },
+        {
+            "TargetName" : "ARPG-Editor",
+            "Configuration" : "Shipping",
+            "withEditor" : true,
+            "UbtExtraFlags" : "",
+            "PlatformName" : "Win64"
+        },
+        {
+            "TargetName" : "ARPG",
+            "Configuration" : "Shipping",
+            "withEditor" : false,
+            "UbtExtraFlags" : "",
+            "PlatformName" : "Win64"
+        }
+    ]
+}
+    

@@ -72,7 +72,7 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\ItemDataAsset.cpp",
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\Definitions\\ItemDataAsset.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
@@ -80,7 +80,7 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\ItemDataAsset.h",
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\Definitions\\ItemDataAsset.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
@@ -88,7 +88,7 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\WeaponDataAsset.cpp",
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\Definitions\\WeaponDataAsset.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
@@ -96,7 +96,23 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\WeaponDataAsset.h",
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\Definitions\\WeaponDataAsset.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\Runtime\\ItemInstance.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\Data\\Runtime\\ItemInstance.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
@@ -216,6 +232,22 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
 	},
 	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventoryItem.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventoryItem.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
+	},
+	{
 		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventorySlotHover.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
@@ -225,22 +257,6 @@
 	},
 	{
 		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\InventorySlotHover.h",
-		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
-		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
-	},
-	{
-		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\Item.cpp",
-		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
-		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.4\\Engine\\Source"
-	},
-	{
-		"file": "C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\Source\\ARPG\\UI\\Item.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
 			"@C:\\Users\\Rick\\Projects\\Unreal\\ARPG\\.vscode\\compileCommands_ARPG\\ARPG.1.rsp"
