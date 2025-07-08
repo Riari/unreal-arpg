@@ -114,6 +114,11 @@ void ABaseMobType::InflictWeaponDamageOnTarget()
 
 	UHealthComponent* TargetHealthComponent = CurrentTarget->FindComponentByClass<UHealthComponent>();
 	if (TargetHealthComponent) TargetHealthComponent->ApplyDamage(RollMeleeDamage());
+
+	{
+		TRACE_CPUPROFILER_EVENT_SCOPE_STR("EnemyActor: Expensive work");
+		FPlatformProcess::Sleep(0.03f);
+	}
 }
 
 void ABaseMobType::Die()

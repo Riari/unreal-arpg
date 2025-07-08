@@ -101,7 +101,7 @@ bool AARPGCharacter::TryGetTargetMobActors(TArray<ABaseMobType*>& OutTargetMobAc
 
 	// DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.f);
 
-	for (FHitResult HitResult : HitResults)
+	for (const FHitResult& HitResult : HitResults)
 	{
 		AActor* HitActor = HitResult.GetActor();
 		OutTargetMobActors.Add(Cast<ABaseMobType>(HitActor));
@@ -159,7 +159,7 @@ void AARPGCharacter::BeginPlay()
 
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	// CurrentWeapon = GetWorld()->SpawnActor<AWeaponActor>(MainHandWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+	CurrentWeapon = GetWorld()->SpawnActor<AWeaponActor>(MainHandWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
 	if (CurrentWeapon)
 	{
 		CurrentWeapon->SetOwner(this);
