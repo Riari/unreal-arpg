@@ -34,7 +34,7 @@ ARPG demo in UE5.
 - [ ] Quest system
 
 **Levels**
-- [ ] Dungeon
+- [x] Dungeon
 
 **Polish / stretch goals**
 - [ ] Music
@@ -43,4 +43,6 @@ ARPG demo in UE5.
 - [ ] Waypoint system
 
 ## Marketplace dependencies
-* [Free Fantasy Weapon Sample Pack](https://www.unrealengine.com/marketplace/en-US/product/e4494c76c3b348aba7ef9b263a6dd496)
+
+* [Free Fantasy Weapon Sample Pack](https://www.fab.com/listings/d5be0dc9-1a41-4be2-a63a-5ed436f3445d)
+* [Stylized - Nanite Dungeon Pack](https://www.fab.com/listings/4054be18-eaae-4a9b-b4e9-fd63fbc83ee9)
